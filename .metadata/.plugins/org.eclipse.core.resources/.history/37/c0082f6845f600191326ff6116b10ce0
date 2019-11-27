@@ -1,0 +1,17 @@
+package com.test.mutithrading.executorframework;
+
+//bad Example
+public class ExceptionHandlingExecutorFramework {
+	
+	 public static void main(String[] args) {
+		    Runnable badTask = () -> {
+		      throw new RuntimeException(
+		          "Throwing exception  from  task execution...");
+		    };
+
+		    ExecutorService exec = Executors.newSingleThreadExecutor();
+		    exec.execute(badTask);
+		    exec.shutdown();
+		  }
+
+}

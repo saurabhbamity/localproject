@@ -1,0 +1,34 @@
+package com.test.mutithrading.executorframework;
+
+import java.util.concurrent.BlockingQueue;
+
+public class CustomThreadPoolEmplemetation {
+	
+	
+	public static void main(String[] args) {
+		
+	}
+
+}
+
+
+class CustomThreadPool
+{
+	
+	int poolsize;
+	
+	
+	BlockingQueue<Runnable> workingQueue;
+	
+	public CustomThreadPool(int poolsize) {
+		
+		
+		
+	}
+	
+	
+	
+}
+
+
+

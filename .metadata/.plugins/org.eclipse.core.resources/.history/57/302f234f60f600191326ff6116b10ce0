@@ -1,0 +1,65 @@
+package com.test.concurrency.threadpoolexecutor;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+
+import com.sun.org.apache.xml.internal.serializer.utils.MsgKey;
+
+public class ConsumerProducerExampleBlockingQueue {
+	
+	
+	
+
+}
+
+
+
+class Message{
+	
+	int msgId;
+	ConcurrentHashMap<Employee, String> keyValues;
+	
+	
+	public int getMsgId() {
+		return msgId;
+	}
+	public void setMsgId(int msgId) {
+		this.msgId = msgId;
+	}
+	public ConcurrentHashMap<String, String> getKeyValues() {
+		return keyValues;
+	}
+	public void setKeyValues(ConcurrentHashMap<String, String> keyValues) {
+		this.keyValues = keyValues;
+	}
+	
+}
+
+
+class Producer implements Runnable{
+	
+	private BlockingQueue<Message> queue;
+	
+	Producer(BlockingQueue<Message> queue){
+	
+		this.queue=queue;
+	}
+
+	@Override
+	public void run() {
+	
+		// code to create en 
+		
+	}
+	
+	
+}
+
+
+class Employee{
+	
+	
+	private int empId;
+	private String empName; 
+	
+}

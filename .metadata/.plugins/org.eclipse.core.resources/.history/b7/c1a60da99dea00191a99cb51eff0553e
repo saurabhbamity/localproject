@@ -1,0 +1,23 @@
+
+public class StaticBlock {
+ static StaticClassCustom obj;
+ 
+ static {
+   obj =new StaticClassCustom();
+ }
+ 
+ 
+ 
+ public static void main(String[] args) {
+  // TODO Auto-generated method stub
+
+ }
+
+}
+
+
+class StaticClassCustom
+{
+ int i;
+ String aname;
+}"

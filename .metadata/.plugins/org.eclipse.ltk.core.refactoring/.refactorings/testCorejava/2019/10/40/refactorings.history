@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.test.override.TestOverrideParent&apos; to &apos;TestOverride&apos;&#x0D;&#x0A;- Original project: &apos;testCorejava&apos;&#x0D;&#x0A;- Original element: &apos;com.test.override.TestOverrideParent&apos;&#x0D;&#x0A;- Renamed element: &apos;com.test.override.TestOverride&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;TestOverrideParent&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.test.override{TestOverrideParent.java[TestOverrideParent" matchStrategy="1" name="TestOverride" qualified="false" references="true" similarDeclarations="false" stamp="1570190132420" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,64 @@
+package com.test.java8.lambda.function;
+
+import java.util.concurrent.Callable;
+import java.util.function.Predicate;
+
+interface FuncInterface 
+{ 
+ // An abstract function 
+ void abstractFun(int x); 
+
+ // A non-abstract (or default) function 
+ default void normalFun() 
+ { 
+    System.out.println("Hello"); 
+ } 
+} 
+
+
+
+public class LambdaExpresionPractice {
+	
+	public static void main(String[] args) {
+		
+		FuncInterface fs=(x)->{System.out.println("number"+x+" is passed as argument");};
+		
+		fs.abstractFun(6);
+		fs.abstractFun(8);
+		
+		//using runnable by lambda
+		Runnable r=()->{
+			for(int i=1;i<=10;i++) {
+				System.out.println("number is "+i);
+			}
+		};
+		
+		Thread t1= new Thread(r);
+		//Thread t2= new Thread(call);
+		t1.start();
+		
+		//using callable by lambda
+		
+		Callable call=()->{
+			
+			for(int i=11;i<=21;i++) {
+				System.out.println("number is calling from caalable "+i);
+			}
+			
+			return 0;
+			
+		};
+		
+		//predicate that takes an argument as input and returns boolean value. 
+		Predicate<String> p1=(s)->s.length()>=5;
+		System.out.println("saurabh length is greater than 5"+p1.test("saurabh"));
+		
+		Predicate<Employee> p2=(emp)->emp.getSalary()>=50000;
+		Employee e= new Employee(59000, true);
+		System.out.println("salary of Employee is greater than 5000"+p2.test(e));
+		
+		
+	}
+	
+
+}

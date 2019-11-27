@@ -1,0 +1,21 @@
+package com.test.override;
+
+class TestOverrideParent {
+	
+	
+	protected int value=9;
+	
+	protected void myInit() {
+		
+		System.out.println("this is parent method init");
+	}
+
+}
+
+
+class TestOverrideChild{
+	
+}
+
+
+

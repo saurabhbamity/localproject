@@ -1,0 +1,22 @@
+package com.test.java8.lambda.function.methodReference;
+
+import com.test.corejava.serialization.Person;
+
+public class OptionalExample {
+	
+	public static void main(String[] args) {
+		
+		
+		//before java 8
+		Person p =null;
+		if (p==null) {
+			p=new Person("saurabh", 35, "connect");
+			System.out.println("new person is created"+p.toString());
+		}else {
+			p.toString();
+		}
+		
+		
+	}
+
+}

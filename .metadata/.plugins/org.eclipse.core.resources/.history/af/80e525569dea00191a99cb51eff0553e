@@ -1,0 +1,8 @@
+package com.test.collection;
+
+public abstract class  TestAbstructWithPrivate {
+
+	abstract void myMethod();
+	
+	
+}

@@ -1,0 +1,20 @@
+package com.test.java8.lambda.function;
+interface IntrFac1
+{
+ static String i="abc";
+}
+
+class Impl1 implements IntrFac1
+{
+ Impl1()
+ {
+   
+  System.out.println(i);
+  
+ }
+ public static void main(String[] args) {
+	 
+	 IntrFac1 interfac= new Impl1();
+	
+}
+}

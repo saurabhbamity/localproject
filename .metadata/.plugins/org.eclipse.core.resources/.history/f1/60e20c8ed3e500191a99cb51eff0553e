@@ -1,0 +1,114 @@
+package com.test.corejava;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+
+//Sorting of objects in treemap needs to implement Comparable, without this, it will not work
+public class Treemap {
+
+	public static void main(String[] args) {
+		Employee12 emp1 = new Employee12("1", "ABC");
+		Employee12 emp2 = new Employee12("2", "XYZ");
+		Map<Employee12, Employee12> map = new TreeMap<>();
+		Map<Employee12, Employee12> hmap = new HashMap<>();
+		
+		map.put(emp1, emp1);
+		map.put(emp2, emp2);
+		
+		hmap.put(emp1, emp1);
+		hmap.put(emp2, emp2);
+		System.out.println(map);
+		System.out.println(map.get(emp1) + "," + map.get(emp2));
+		System.out.println(hmap.get(emp1) + "," + hmap.get(emp2));
+		
+		//Working 
+		emp1.setName("Rishabh");
+		emp2.setName("Saurabh");
+		System.out.println("\n--------------------------Changed name in keys-------------------------" );
+		System.out.println(map.get(emp1) + "," + map.get(emp2));
+		System.out.println(hmap.get(emp1) + "," + hmap.get(emp2));
+		
+		//Not Working 
+		emp1.setName("anamika");
+		emp2.setName("sadma");
+		System.out.println("\\n--------------------------Changed again name in keys-------------------------" );
+		System.out.println(map.get(emp1) + "," + map.get(emp2));
+		System.out.println(hmap.get(emp1) + "," + hmap.get(emp2));
+	}
+
+}
+
+class Employee12 implements Comparable<Employee12> {
+
+	String id;
+	String name;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Employee12(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		System.out.println("hashcode is called"+result);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee12 other = (Employee12) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + "]";
+	}
+
+	@Override
+	public int compareTo(Employee12 e) {
+		return this.name.compareTo(e.getName());
+	}
+
+	
+
+}

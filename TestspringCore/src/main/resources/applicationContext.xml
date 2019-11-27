@@ -1,0 +1,287 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd"
+	default-init-method="defalutInit" default-destroy-method="defaultDestroy">
+ 
+	<context:component-scan base-package="com.test.springcore.dao,com.test.springcore.examples"></context:component-scan>
+   <aop:aspectj-autoproxy />
+	
+ 
+     <!-- beans sample Example spring -Start-->
+	<bean id="helloWorldSample"
+		class="com.test.springcore.sample.HelloWorldSample">
+		<property name="name" value="Spring Sample Program" />
+	</bean>
+	
+	<!-- beans sample Example spring -End-->
+	
+	
+	<!-- Example when singleton bean refering the prototype bean, child bean should give prototype each time **start -->
+    <bean id="employeeBean" class="com.test.springcore.autowire.prototyperefinsingleton.EmployeeBeanSingleton">
+       <lookup-method name="createDepartmentBeanPrototype" bean="department"/>
+    </bean>
+    <!-- Example when singleton bean refering the prototype bean, child bean should give prototype each time **end -->
+    
+	<!--  <bean id="employee" class="com.test.springcore.autowire.Employee" autowire="constructor">
+        <property name="fullName" value="Lokesh Gupta"/> 
+    </bean>-->
+    <!-- Example when singleton bean refering the prototype bean and refered bean gives the object of child as singleton **start -->
+	<bean id="employee" class="com.test.springcore.autowire.prototyperefinsingleton.Employee">
+		<property name="fullName" value="Lokesh Gupta" />
+		<constructor-arg>
+			<ref bean="department" />
+		</constructor-arg>
+	</bean>
+    <bean id="department" class="com.test.springcore.autowire.prototyperefinsingleton.Department" scope="prototype">
+        <property name="name" value="Human Resource" />
+    </bean>
+    <!--  Example when singleton bean refering the prototype bean and refered bean gives the object as prototype **end -->   
+  
+    
+   
+    
+    <!-- beans for init, Destroy, defalutDestroy, defaultInitialize and bean postprocessor Example -Start-->
+    
+    <bean id = "helloWorld" class = "com.test.springcore.beanpostprocessor.HelloWorld" init-method = "myInit" destroy-method = "myDestroy">
+      <property name = "message" value = "Hello World!"/>
+   </bean>
+   
+   
+   <bean class = "com.test.springcore.beanpostprocessor.InitHelloWorld" />
+   <!-- custom  bean factory post processor-->
+   <bean class="com.test.springcore.beanFactoryPostProcessor.BeanFactoryPostProcessorClass"/>
+    
+	<!-- beans for init, Destroy, defalutDestroy, defaultInitialize and bean postprocessor Example -Ends-->
+	
+	<!-- beans for Database connection using propertyPlaceholderconfigurator Example -Starts-->
+	  <!-- spring core  bean factory post processor to use key value in applicationcontet.xml-->
+	 <bean id="jdbcproperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+      <!--  <property name="location" value="classpath:jdbc.properties"/>-->
+       <property name = "locations">
+      <list>
+      <value>classpath:jdbc.properties</value>
+       <value>classpath:ftp.properties</value>
+      </list> 
+    </property>
+      <!-- this will prevent the Spring IoC container to check whether all the property is present or not. In case of a missing property Spring will not throw any exception. -->
+      <property name="ignoreUnresolvablePlaceholders" value="true"/>
+       
+     </bean>
+	
+     <bean id="jdbc" class="com.test.springcore.beanFactoryPostProcessor.JDBCExample">
+	      <property name="url" value="${jdbc.url}"></property>
+	      <property name="username" value="${jdbc.username}"></property>
+	      <property name="password" value="${jdbc.password}"></property>
+     </bean>
+	
+	<!-- beans for Database connection using propertyPlaceholderconfigurator Example -Ends-->
+	
+	<!-- beans for Resource Bundle source Example  to get language specific msgs in application-Starts-->
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename">
+        <value>messages</value>
+    </property>
+    </bean>
+<!-- beans for Resource Bundle source Example  to get language specific msgs in application-Ends-->
+
+<!--  configure data source in eclipse-->
+
+<!-- Initialization for data source -->
+   <bean id="dataSource" 
+      class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name = "driverClassName" value = "${jdbc.driver}"/>
+      <property name = "url" value = "${jdbc.url}"/>
+      <property name = "username" value = "${jdbc.username}"/>
+      <property name = "password" value = "${jdbc.username}"/>
+   </bean>
+   
+   <bean id="jdbcTemplateObject" class="org.springframework.jdbc.core.JdbcTemplate">
+   <constructor-arg  ref="dataSource"></constructor-arg>
+   </bean>
+   
+   <bean id="namedparamjdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+   <constructor-arg ref="dataSource"></constructor-arg>
+   </bean>
+   
+    <bean id="StudentDaoImpl" class = "com.test.springcore.dao.StudentDaoImpl"></bean>
+    <bean id="customerBoImpl" class="com.test.springcore.aspact.CustomerBoImpl" />
+    <bean id="inventoryservice" class="com.test.springcore.aspact.DefaultInventoryService" />
+   
+   <!-- Aspect -->
+   <!-- for better understanding which method is been called. I have commented -->
+   <!--  <bean id="logAspect" class="com.test.springcore.aspact.Logging.LoggingAspect" />-->
+     <bean id="logAspectjoinpoints" class="com.test.springcore.aspact.Logging.LoggingAspectJoinPoints" />
+   <bean id="auditInvAspect" class="com.test.springcore.aspact.AuditInventoryAspect" />
+   <!-- end of Aspect -->
+   
+   <!-- collection -->
+   <bean id="pointA" class="com.test.springcore.Collection.Point">
+	   <property name="xcordinate" value="10"></property>
+	   <property name="ycordinate" value="10"></property>
+   </bean>
+   <bean id="pointB" class="com.test.springcore.Collection.Point">
+     <property name="xcordinate" value="20"></property>
+	   <property name="ycordinate" value="20"></property>
+   </bean>
+   <bean id="pointC" class="com.test.springcore.Collection.Point">
+     <property name="xcordinate" value="25"></property>
+	   <property name="ycordinate" value="15"></property>
+   </bean>
+   
+   <bean id="tringle" class="com.test.springcore.Collection.Tringle" name="tringlename">
+   <property name="points">
+	   <list>
+		   <ref bean="pointA"/>
+		   <ref bean="pointB"/>
+		   <ref bean="pointC"/>
+	   </list>
+   </property>
+   </bean>
+   
+   <alias name="tringlename" alias="trialias"/>
+   <!-- end of the collection -->
+   
+   
+    <!-- Autowire Example -->
+   <bean id="pointAA" class="com.test.springcore.collections.autowired.Point">
+	   <property name="xcordinate" value="10"></property>
+	   <property name="ycordinate" value="10"></property>
+   </bean>
+   <bean id="pointBB" class="com.test.springcore.collections.autowired.Point">
+     <property name="xcordinate" value="20"></property>
+	   <property name="ycordinate" value="20"></property>
+   </bean>
+   <bean id="pointCC" class="com.test.springcore.collections.autowired.Point">
+     <property name="xcordinate" value="25"></property>
+	   <property name="ycordinate" value="15"></property>
+   </bean>
+   
+   <bean id="b" class="com.test.springcore.autowiredRequire.AutoA"></bean>
+   
+    <bean id="c" class="com.test.springcore.autowiredRequire.AutoA"></bean>
+   
+   <bean id="tringleAuto" class="com.test.springcore.collections.autowired.TringleAuto"  autowire="byName"/>
+   <!-- Autowire Example -->
+   
+   <!-- prototype to singleton reference -start-->
+   <bean id="human" class="com.test.springcore.prototypesingleton.Human" scope="prototype">
+	   <property name="name" value="ram" />
+	   <property name="organ" ref="organ"></property>
+   </bean>
+   
+   <bean id="organ" class="com.test.springcore.prototypesingleton.Organs">
+	   <property name="name" value="ram" >
+	   </property>
+   </bean>
+   
+   <!-- prototype to singleton reference -ends-->
+   
+   <!-- Bean life cycle to get bean name and application context during initialization-start -->
+   
+   <bean id="aware" class="com.test.springcore.applicationContextAware.ContextAwareBeanAware"/>
+   
+   <!-- Bean life cycle to get bean name and application context during initialization-start -->
+   
+   <!-- this is bean definition inheritance start-->
+   
+   <bean id="point1" class="com.test.springcore.beandefinitioninheritance.Point">
+	   <property name="xaxis" value="10"/>
+	   <property name="yaxis" value="10"/>
+   </bean>
+   
+   <bean id="point2" class="com.test.springcore.beandefinitioninheritance.Point">
+	   <property name="xaxis" value="20"/>
+	   <property name="yaxis" value="20"/>
+   </bean>
+   
+   <bean id="line" class="com.test.springcore.beandefinitioninheritance.Line"  autowire="byName"></bean>
+   
+    <bean id="point3" class="com.test.springcore.beandefinitioninheritance.Point">
+	   <property name="xaxis" value="30"/>
+	   <property name="yaxis" value="30"/>
+   </bean>
+    <bean id="trigleInherited" class="com.test.springcore.beandefinitioninheritance.Tringle"  parent="line" autowire="byName">
+   </bean>
+   
+    <bean id="point4" class="com.test.springcore.beandefinitioninheritance.Point">
+	   <property name="xaxis" value="40"/>
+	   <property name="yaxis" value="40"/>
+   </bean>
+   <bean id="ractangle" class="com.test.springcore.beandefinitioninheritance.Ractangle"  parent="line" autowire="byName">
+   </bean>
+   <!-- this is bean definition inheritance end-->
+   
+   <!-- Required annotation required spring core provided bean post processor to get configured start-->
+   <!--  <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>-->
+   
+   <bean id="nappy" class="com.test.springcore.RequiredAnnotation.Babypack">
+        <property name="dipperName" value="himalaya"/>
+        <property name="babyOil" value="dabur"/>
+         <property name="babymilk" value="60"/>
+          <property name="babyCloths" value="4"/>
+   </bean>
+   <bean id="babyonboard" class="com.test.springcore.RequiredAnnotation.Baby" >
+   	<property name="nappy" ref="nappy"/>
+   </bean>
+   <bean id="parentsonboard" class="com.test.springcore.RequiredAnnotation.Parents" />
+   <!-- Required annotation required spring core provided bean post processor to get configured start-->
+   
+   <!-- Autowired Annotation  start-->
+   
+   <!--  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->
+   
+   <bean id="ramu" class="com.test.springcore.autowiredRequire.Servent">
+   <property name="name" value="ram"/>
+   </bean>
+   
+    <bean id="shayaamu" class="com.test.springcore.autowiredRequire.Servent" name="shayaamu" >
+   <property name="name" value="shayaam"/>
+   </bean>
+   
+   <bean id="malik" class="com.test.springcore.autowiredRequire.Malik"/>
+    <!-- Autowired Annotation  end-->
+    
+    <!-- Remove all bean post processors when using context:annotation:cofig start -->
+    
+    <!-- @resource Example starts-->
+    <bean id="babu" class="com.test.springcore.autowiredRequire.Driver">
+    <property name="name" value="babu"/>
+    </bean>
+    
+     <!-- @resource Example ends-->
+    <context:annotation-config/>
+     <!-- Remove all bean post processors when using context:annotation:cofig end -->
+     
+     <!-- add component scan to configure beans without difining it from application.xml -->
+    <!-- adding controller, component, repository and service  in pack -->
+     <context:component-scan base-package="com.test.springcore.styeotypeAnnocation"></context:component-scan>
+     
+    <bean id="repository1" class="com.test.springcore.styeotypeAnnocation.RepositoryClass"></bean>
+     
+     <!--<bean id="services" class="com.test.springcore.styeotypeAnnocation.ServiceClass">
+     	<property name="repository1" ref="repository1"></property>
+     </bean> -->
+     
+      <!-- add component scan to configure beans without difining it from application.xml ends-->
+      
+      <!-- aop Understanding : Start -->
+      
+      <bean id="circle" class="com.test.aop.understandaop.Circle">
+      		<property name="name" value="Circle Draw"></property>
+      </bean>
+      
+       <bean id="tringleaop" class="com.test.aop.understandaop.Tringle">
+      		<property name="name" value="Tringle Draw"></property>
+      </bean>
+      
+      <bean id="shapeService" class="com.test.aop.understandaop.ShapeService">
+      		<property name="circle" ref="circle"></property>
+      		<property name="tringle" ref="tringleaop"></property>
+      </bean>
+      <!-- aop Understanding : Ends -->
+   
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "classpath://org/hibernate/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">test</property>
+        <property name="hibernate.connection.password">test</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="use_sql_comments">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+        
+         <!-- enable second level cache and query cache -->
+		 <property name="hibernate.cache.use_second_level_cache">true</property>
+		 <property name="hibernate.cache.use_query_cache">true</property>
+		 
+        <!--  <mapping class="com.test.valuetypeembedded.Users" /> -->
+        
+        <!--  mapping starts here-->
+         <mapping class="com.test.valuetypeembedded.UsersDetails"/>
+         <mapping class="com.test.onetoone.Student"/>
+         <mapping class="com.test.onetoone.Registration"/>
+         <mapping class="com.test.proxyExampleNCollection.Tanent"/>
+         <mapping class="com.test.onetoMany.Hosteller"/>
+         <mapping class="com.test.onetoMany.HostelOwner"/>
+         <mapping class="com.test.manytomany.Customer"/>
+         <mapping class="com.test.manytomany.Portal"/>
+         <mapping class="com.test.sample.Employee"/>
+          <mapping class="com.test.crud.Employer"/>
+         <mapping class="com.test.cascadePersist.Person"/>
+         <mapping class="com.test.cascadePersist.Taxi"/>
+         <mapping class="com.test.inheritance.Vehicle"/>
+          <mapping class="com.test.inheritance.TwoWheeler"/>
+           <mapping class="com.test.inheritance.FourWheeler"/>
+         <mapping resource="user.hbm.xml" />
+         <!--  mapping ends here-->
+    </session-factory>
+</hibernate-configuration>

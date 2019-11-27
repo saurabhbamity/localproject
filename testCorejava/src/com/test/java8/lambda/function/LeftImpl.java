@@ -1,0 +1,13 @@
+package com.test.java8.lambda.function;
+
+public class LeftImpl implements Left {
+	
+	 @Override
+	    public void m1() {
+	        // TODO Auto-generated method stub
+	        //Left.super.m1();
+	       System.out.println("left Impl m1");
+	    }
+
+
+}

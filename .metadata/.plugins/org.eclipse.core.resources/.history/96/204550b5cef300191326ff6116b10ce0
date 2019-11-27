@@ -1,0 +1,14 @@
+interface IntrFac1
+{
+ String i="abc";
+}
+
+class Impl1 implements IntrFac1
+{
+ Impl1()
+ {
+   
+  System.out.println(i);
+  
+ }
+}

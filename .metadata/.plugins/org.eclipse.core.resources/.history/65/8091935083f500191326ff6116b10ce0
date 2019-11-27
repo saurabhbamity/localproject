@@ -1,0 +1,50 @@
+package com.test.mutithrading.executorframework;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class CustomThreadPoolEmplemetation {
+	
+	
+	public static void main(String[] args) {
+		
+	}
+
+}
+
+
+class CustomThreadPool
+{
+	
+	private final int poolsize;
+	
+	//Internally pool is an array
+    private final WorkerThread[] workers;
+	
+	BlockingQueue<Runnable>[] workingQueue;
+	
+	public CustomThreadPool(int poolsize) {
+		this.poolsize=poolsize;
+		workingQueue= new LinkedBlockingQueue<>();
+		
+		for(int i=1;i<poolsize;i++)
+		{
+			workingQueue
+		}
+		
+		
+		
+	}
+	
+	
+	public void execute()
+	{
+		
+	}
+	
+	
+	
+}
+
+
+

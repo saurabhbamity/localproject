@@ -1,0 +1,15 @@
+import java.math.BigInteger;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+//@ThreadSafe 
+public class StatelessFactorizer implements Servlet
+{ 
+	public void service(ServletRequest req, ServletResponse resp) 
+	{ 
+		BigInteger i = extractFromRequest(req); BigInteger[] factors = factor(i); 
+		encodeIntoResponse(resp, factors); 
+	} 
+} 

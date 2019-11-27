@@ -1,0 +1,9 @@
+package com.test.collection;
+
+public class CustomIOException extends IOException {
+    public CustomIOException(boolean fail) {
+        if (fail) {
+            throw new RuntimeException("the compiler will never know about me");
+        }
+    }
+}

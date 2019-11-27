@@ -1,0 +1,39 @@
+package com.test.corejava.multiutheading.puzzle;
+
+public class RunMainLast {
+	
+	
+	public static void main(String[] args) {
+		
+		LocalThread t1= new LocalThread();
+		LocalThread t2= new LocalThread();
+		LocalThread t3= new LocalThread();
+		
+		for(int i=2;i<10;i++)
+		{
+			System.out.println("main Thread running the code");
+		}
+		
+		t1.s
+		
+	}
+	
+	
+	
+	
+
+}
+
+
+class LocalThread implements Runnable{
+
+	@Override
+	public void run() {
+		System.out.println("thead name"+ Thread.currentThread().getName()+" is executing the task");
+		
+	}
+	
+}
+
+
+

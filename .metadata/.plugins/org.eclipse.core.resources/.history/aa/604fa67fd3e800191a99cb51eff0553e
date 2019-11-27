@@ -1,0 +1,5 @@
+package com.test.concurrency.inpractice.chaptor2;
+
+public class StatelessFactorizer {
+
+}

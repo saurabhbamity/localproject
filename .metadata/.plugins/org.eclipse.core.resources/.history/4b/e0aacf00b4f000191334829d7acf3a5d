@@ -1,0 +1,67 @@
+package com.test.java8.lambda.function.methodReference;
+
+
+interface MathCalculation {
+    
+    void doOperation(int a, int b);
+}
+
+public class TestMethodReference {
+    
+    
+    public static  void lookalikerun()
+    {
+        for(int i=0;i<=10;i++)
+        {
+            System.out.println("value of i is "+i);
+        }
+        
+    }
+    
+    public static  void lookalikeDoOperation(int a , int b)
+    {
+        System.out.println(" sum from static method is: "+(a+b));
+        
+    }
+    
+    private int lookalikeDoOperation2(int a , int b)
+    {
+        System.out.println(" sum from non static metod is: "+(a+b));
+        return 0;
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        //lambda way of working
+        MathCalculation mathaddition=(a,b)->System.out.println("sum is "+(a+b));
+        mathaddition.doOperation(20,30);
+        
+        //lambda replaced with static method reference
+        MathCalculation mathaddition2=TestMethodReference10::lookalikeDoOperation;
+        mathaddition2.doOperation(30, 40);
+        
+        //lambda replaced with static method reference
+        TestMethodReference10 tcr= new TestMethodReference10();
+        // only one rule, the number of parameter should be same with look alike method, else access modifier and retn type and name of the method //lambda replaced with static method reference can be changed
+        //when implementation is present we should use the method reference, else user should go with  lambda expressions.
+        MathCalculation mathaddition3= tcr:: lookalikeDoOperation2;
+        mathaddition3.doOperation(40, 50);
+        
+        Runnable r=()->{
+            
+            for(int i=0;i<=10;i++)
+            {
+                System.out.println("value of i from lambda expresion is "+i);
+            }
+        };
+        
+        Runnable r2=TestMethodReference10::lookalikerun;
+        
+        Thread t1= new Thread(r);
+        Thread t2= new Thread(r2);
+        t1.start();
+        t2.start();
+        
+    }
+}

@@ -1,0 +1,48 @@
+Limit-service
+http://localhost:8080/limits/
+
+config server:
+
+http://localhost:8888/limits-service/default/
+http://localhost:8888/limits-service/dev/
+http://localhost:8888/limits-service/qa/
+
+
+currency-Exchange-service:
+
+http://localhost:8001/h2-console/login.do?jsessionid=c4b874b8a01174c0256cae1703383c73
+http://localhost:8001/currency-exchange/from/USD/to/INR
+http://localhost:8001/currency-exchange/from/EUR/to/INR
+
+currency-Excahange-service:
+
+http://localhost:8100/currency-converter/from/USD/to/INR/quantity/1000
+
+feign call:Api call : to make rest api call independent of many hard code entries.
+http://localhost:8100/currency-converter-feign/from/USD/to/INR/quantity/1000/
+
+ribon:client side load balance: using fiegn to call one of up instance of rest service.
+http://localhost:8100/currency-converter-feign/from/USD/to/INR/quantity/1000/
+sometimes from 8001 response, sometimes from 8001 response
+
+eureka:naming server- registry and discovery of service, All call will be first registered here,
+ and other services will call naming server to get the up and running instance of the server called. 
+http://localhost:8761/
+
+zuul : Api gateway
+http://localhost:8765/{application name}/{uri}
+http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR
+
+http://localhost:8000/currency-exchange/from/EUR/to/INR
+
+http://localhost:8100/currency-converter-feign/from/USD/to/INR/quantity/1000/
+
+calling to currency conversion service is :
+
+http://localhost:8765/{application name}/{uri}
+http://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/INR/quantity/1000/
+
+
+
+
+

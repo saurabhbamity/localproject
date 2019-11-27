@@ -1,0 +1,15 @@
+package com.test.java8.lambda.function;
+
+public class StaticMethodInterfaceImpl implements StaticMethodInterface, Right {
+
+    public static void main(String[] args) {
+        
+        StaticMethodInterface.m1();
+        //m1(); // wrong
+        //StaticMethodInterfaceImpl.m1(); // wrong
+        //StaticMethodInterfaceImpl st= new StaticMethodInterfaceImpl(); 
+        //st.m1(); // wrong
+        
+    }
+
+}

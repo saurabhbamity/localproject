@@ -1,0 +1,91 @@
+package com.test.java8.streamApi;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+public class ParallelStreamExample {
+	
+	public static void main(String[] args) {
+		
+		List<Student> list= new ArrayList<>();
+		list.add(new Student(1, 23, "saurabh", "science"));
+		list.add(new Student(1, 21, "chanchal", "science"));
+		list.add(new Student(1, 22, "nitin", "art"));
+		list.add(new Student(1, 20, "kunal", "commerce"));
+		list.add(new Student(1, 23, "basal", "commerce"));
+		list.add(new Student(1, 31, "rachna", "science"));
+		list.add(new Student(1, 50, "rupam", "art"));
+		
+	//all student count of age 23
+		System.out.println(list.stream().filter(stu->stu.getAge()==23).count());
+		
+	// all student that can select in interview are having science side, age should be less than 20	
+		list.stream().filter(st->(st.getAge()<=20 && st.getDdepartment().equals("science"))).collect(Collectors.toList()).forEach(System.out::println);
+		
+	}
+
+
+
+}
+
+
+class Student{
+	
+	private int id;
+	private int age;
+	private String name;
+	private String department;
+	
+	
+
+	public Student(int id, int age, String name, String ddepartment) {
+		super();
+		this.id = id;
+		this.age = age;
+		this.name = name;
+		department = department;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDdepartment() {
+		return department;
+	}
+
+	public void setDdepartment(String department) {
+		department = department;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", age=" + age + ", name=" + name + ", department=" + department + ", toString()="
+				+ super.toString() + "]";
+	}
+	
+}

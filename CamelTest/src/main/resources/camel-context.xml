@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd          
+		http://camel.apache.org/schema/spring 
+		http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="routeBuilder" class="com.test.camel.route.SimpleRouteBuilder" />
+
+	
+	<camelContext id="camelId" xmlns="http://camel.apache.org/schema/spring">
+	    <routeBuilder ref="routeBuilder" />
+		<!-- <camel:route>
+			<camel:from uri="amq:queue:queue1" />
+			<camel:log message="Message returned from the queue is " />
+		</camel:route> -->
+	</camelContext>
+	
+</beans>

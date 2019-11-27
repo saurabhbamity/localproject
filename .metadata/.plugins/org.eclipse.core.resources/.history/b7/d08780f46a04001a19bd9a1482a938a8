@@ -1,0 +1,15 @@
+package com.test.corejava;
+
+public class FinalExampleClass implements M1Interface extends FinalM1Class {
+	
+	
+	public static void main(String[] args) {
+		
+	}
+
+}
+
+interface M1Interface {
+	public void m1();
+	
+}

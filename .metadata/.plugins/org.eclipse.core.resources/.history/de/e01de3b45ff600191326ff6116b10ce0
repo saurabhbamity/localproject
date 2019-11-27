@@ -1,0 +1,33 @@
+package com.test.concurrency.threadpoolexecutor;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ConsumerProducerExampleBlockingQueue {
+	
+	
+	
+
+}
+
+
+
+class Message{
+	
+	int msgId;
+	ConcurrentHashMap<String, String> keyValues;
+	
+	
+	public int getMsgId() {
+		return msgId;
+	}
+	public void setMsgId(int msgId) {
+		this.msgId = msgId;
+	}
+	public ConcurrentHashMap<String, String> getKeyValues() {
+		return keyValues;
+	}
+	public void setKeyValues(ConcurrentHashMap<String, String> keyValues) {
+		this.keyValues = keyValues;
+	}
+	
+}

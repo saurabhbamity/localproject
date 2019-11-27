@@ -1,0 +1,20 @@
+package com.test.override;
+
+class TestOverrideParent {
+	
+	
+	protected int value=9;
+	
+	protected void myInit() {
+		
+	}
+
+}
+
+
+class TestOverrideChild{
+	
+}
+
+
+

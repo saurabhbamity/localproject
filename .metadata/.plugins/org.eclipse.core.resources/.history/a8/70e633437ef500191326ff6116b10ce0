@@ -1,0 +1,33 @@
+package com.test.mutithrading.executorframework;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+
+public class schedulerExample {
+	
+	public static void main(String[] args) {
+		
+		ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(2);
+		
+	}
+
+}
+
+
+
+class Task implements Runnable {
+    private String name;
+ 
+    public Task(String name) {
+        this.name = name;
+    }
+ 
+    public String getName() {
+        return name;
+    }
+ 
+    public void run() {
+        System.out.println("Executing : " + name + ", Current Seconds : " + new Date().getSeconds());
+    }
+}

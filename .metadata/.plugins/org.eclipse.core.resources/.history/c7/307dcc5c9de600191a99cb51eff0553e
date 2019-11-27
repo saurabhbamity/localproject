@@ -1,0 +1,5 @@
+package com.test.override;
+
+public class TestOverrideParent {
+
+}

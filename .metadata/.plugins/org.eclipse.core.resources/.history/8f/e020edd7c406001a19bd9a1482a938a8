@@ -1,0 +1,20 @@
+package com.test.corejava.java8;
+
+public class factorialProgramRec {
+	
+	int factorial;
+	
+	
+	
+	
+	public int getfactorial(int factnumber) {
+		if(factnumber==1)
+		{
+			return 1
+		}else{
+			factorial=factnumber * getfactorial(factnumber-1)
+		}
+		
+	}
+
+}

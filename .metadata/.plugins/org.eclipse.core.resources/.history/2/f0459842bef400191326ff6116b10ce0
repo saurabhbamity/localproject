@@ -1,0 +1,68 @@
+package com.test.java8.streamApi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ParallelStreamExample {
+	
+	public static void main(String[] args) {
+		
+		List<Student> list= new ArrayList<>();
+		list.add(new Student(1, 23, "saurabh", department))
+		
+	}
+
+}
+
+
+class Student{
+	
+	private int id;
+	private int age;
+	private String name;
+	private String department;
+	
+	
+
+	public Student(int id, int age, String name, String ddepartment) {
+		super();
+		this.id = id;
+		this.age = age;
+		this.name = name;
+		department = department;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDdepartment() {
+		return department;
+	}
+
+	public void setDdepartment(String department) {
+		department = department;
+	}
+	
+}

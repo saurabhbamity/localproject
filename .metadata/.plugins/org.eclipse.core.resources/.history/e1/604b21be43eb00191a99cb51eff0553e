@@ -1,0 +1,38 @@
+package com.test.collection;
+
+public class StaticBlock {
+ static StaticClassCustom obj;
+ 
+ static {
+   obj =new StaticClassCustom();
+ }
+ 
+ 
+ 
+ public static void main(String[] args) {
+  // TODO Auto-generated method stub
+	 
+	 
+	//new A();
+	 
+	 Integer pa  = null;  
+	 int i = pa; 
+
+	 System.out.println("test"+i);
+ }
+
+}
+
+
+class StaticClassCustom
+{
+ int i;
+ String aname;
+}
+
+
+class A{
+	
+	A(){new A();}
+	
+}

@@ -1,0 +1,59 @@
+package com.test.mutithrading.executorframework;
+
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import com.test.executorFramework.ReenterantLock4;
+
+public class ExecutorExample {
+	
+	public static void main(String[] args) {
+		
+		Object[] obj= {"string", new Object(),new ReenterantLock4() };
+		
+		ScheduledExecutorService excuterservice= Executors.newScheduledThreadPool(2);
+		
+		Task task = new Task("Repeat Task");
+        System.out.println("Created : " + task.getName());
+        
+		excuterservice.scheduleWithFixedDelay(task, 5, 5, TimeUnit.SECONDS);
+		
+		// thread tool Executor
+		
+		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+        
+        for (int i = 1; i <= 5; i++)
+        {
+            Task fixedtask = new Task("Task " + i);
+            System.out.println("Created : " + fixedtask.getName());
+ 
+            executor.execute(fixedtask);
+        }
+        executor.shutdown();
+		
+	}
+	
+	
+
+}
+
+
+
+class Task implements Runnable {
+    private String name;
+ 
+    public Task(String name) {
+        this.name = name;
+    }
+ 
+    public String getName() {
+        return name;
+    }
+ 
+    public void run() {
+        System.out.println("Executing : " + name + ", Current Seconds : " + new Date().getSeconds());
+    }
+}

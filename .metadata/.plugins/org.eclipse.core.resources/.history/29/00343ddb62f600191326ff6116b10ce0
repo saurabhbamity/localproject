@@ -1,0 +1,137 @@
+package com.test.concurrency.threadpoolexecutor;
+
+import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ConsumerProducerExampleBlockingQueue {
+	
+	
+	public static void main(String[] args) {
+		
+		BlockingQueue<Message> queue = new ArrayBlockingQueue<>(10);
+		 Producer producer = new Producer(queue);
+	     Consumer consumer = new Consumer(queue);
+	     //starting producer to produce messages in queue
+	     new Thread(producer).start();
+	     //starting consumer to consume messages from queue
+	     new Thread(consumer).start();
+	     System.out.println("Producer and Consumer has been started");
+		
+	}
+	 
+	
+
+}
+
+
+
+class Message{
+	
+	int msgId;
+	Map<Employee, String> keyValues;
+	
+	public Message(int msgId, Map<Employee, String> keyValues) {
+		super();
+		this.msgId = msgId;
+		this.keyValues = keyValues;
+	}
+	
+	
+	public int getMsgId() {
+		return msgId;
+	}
+	
+	public void setMsgId(int msgId) {
+		this.msgId = msgId;
+	}
+	public Map<Employee, String> getKeyValues() {
+		return keyValues;
+	}
+	public void setKeyValues(ConcurrentHashMap<Employee, String> keyValues) {
+		this.keyValues = keyValues;
+	}
+	
+}
+
+
+class Producer implements Runnable{
+	
+	private BlockingQueue<Message> queue;
+	
+	Producer(BlockingQueue<Message> queue){
+	
+		this.queue=queue;
+	}
+
+	@Override
+	public void run() {
+	
+		// code to create new msg each time 
+		
+		for (int i=0;i<10;i++)
+		{
+			int value=(int)(Math.random()*10)/5;
+			Map<Employee, String> conmap= new ConcurrentHashMap<>();
+			Employee e=new Employee(value, "name"+i);
+			conmap.put(e, ""+value);
+			Message msg = new Message(value, conmap);
+			queue.add(msg);	
+		}	
+	}	
+}
+
+
+class Consumer  implements Runnable{
+	
+private BlockingQueue<Message> queue;
+	
+    Consumer(BlockingQueue<Message> queue){
+		this.queue=queue;
+	}
+
+	@Override
+	public void run() {
+		try{
+            Message msg;
+            //consuming messages until exit message is received
+            while((msg = queue.take()).getMsgId() !=0){
+            Thread.sleep(10);
+            System.out.println("Consumed "+msg.getMsgId());
+            }
+        }catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+	}
+}
+
+
+class Employee{
+	
+	private int empId;
+	private String empName;
+	
+	public Employee(int empId, String empName) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+	}
+	
+	
+	
+	
+	public int getEmpId() {
+		return empId;
+	}
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	} 
+	
+}

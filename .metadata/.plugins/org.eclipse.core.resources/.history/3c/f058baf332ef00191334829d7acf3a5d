@@ -1,0 +1,41 @@
+package com.test.java8.lambda.function;
+
+
+interface FuncInterface 
+{ 
+ // An abstract function 
+ void abstractFun(int x); 
+
+ // A non-abstract (or default) function 
+ default void normalFun() 
+ { 
+    System.out.println("Hello"); 
+ } 
+} 
+
+
+
+public class LambdaExpresionPractice {
+	
+	public static void main(String[] args) {
+		
+		FuncInterface fs=(x)->{System.out.println("number"+x+" is passed as argument");};
+		
+		fs.abstractFun(6);
+		fs.abstractFun(8);
+		
+		Thread t1= new Thread(r);
+		t1.start();
+	}
+	
+	//using runnable
+	
+	Runnable r=()->{
+		for(int i=1;i<=10;i++) {
+			System.out.println("number is "+i);
+		}
+	};
+	
+	
+
+}

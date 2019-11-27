@@ -1,0 +1,55 @@
+package com.test.collection;
+import java.util.Optional;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class StaticBlock {
+ static StaticClassCustom obj;
+ 
+ static {
+   obj =new StaticClassCustom();
+ }
+ 
+ 
+ 
+ public static void main(String[] args) {
+  // TODO Auto-generated method stub
+	 
+	 
+	//new A();
+	 
+	 Integer pa  = null;  
+	 int i = pa; 
+
+	 System.out.println("test"+i);
+	 
+	 String[] str = new String[10];  
+     String lowercaseString = str[5].toLowerCase();  
+     System.out.print(lowercaseString); 
+ }
+
+}
+
+
+class StaticClassCustom
+{
+ int i;
+ String aname;
+}
+
+
+class A{
+	
+	A(){new A();}
+	
+}
+
+
+class CustomIOException extends IOException {
+    public CustomIOException(boolean fail) {
+        if (fail) {
+            throw new RuntimeException("the compiler will never know about me");
+        }
+    }
+}

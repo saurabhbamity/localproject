@@ -1,0 +1,29 @@
+package com.test.corejava.java8;
+
+public class factorialProgramRec {
+	
+	int factorial;
+	
+	public static void main(String[] args) {
+		
+		factorialProgramRec fact= new factorialProgramRec();
+		int factorial =fact.getfactorial(5);
+		  System.out.println("factorial is "+factorial);
+	}
+	
+	
+	
+	
+	public int getfactorial(int factnumber) {
+		if(factnumber==1)
+		{
+			return 1;
+		}else{
+			factorial=factnumber * getfactorial(factnumber-1);
+		}
+		
+		return factorial;
+		
+	}
+
+}
